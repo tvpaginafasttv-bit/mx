@@ -56,64 +56,7 @@
   </style>
 </head>
 <body>
-   header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(15,23,42,0.95);
-      backdrop-filter: blur(8px);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 12px 20px;
-      flex-wrap: wrap;
-    }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .mark {
-      width: 42px; height: 42px;
-      border-radius: 8px;
-      background: linear-gradient(135deg,var(--accent),var(--accent-2));
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; color: white;
-      font-size: 18px;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-    }
-
-    .btn {
-      background: var(--accent);
-      padding: 10px 16px;
-      border-radius: 10px;
-      color: white;
-      font-weight: 600;
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      border: none;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .btn:hover { opacity: 0.9; }
-    .btn.secondary { background: transparent; border: 1px solid rgba(255,255,255,0.2); }
-    .btn.bbva { background: #004481; }
-    .btn.mercado { background: #009ee3; }
-
-  
   <div class="container">
 <header>
     <div class="logo">
@@ -285,6 +228,7 @@ stars.forEach(star => {
   </a>
 </body>
 </html>
+
 
 
 
