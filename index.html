@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <style>
+    :root{--accent:#e11d48;--accent-2:#1e40af;--bg:#0f172a;--card:#0b1220;--muted:#94a3b8;--glass:rgba(255,255,255,0.03)}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:linear-gradient(180deg,#041024 0%, #07122a 100%);color:#e6eef8}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1100px;margin:24px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    .logo{display:flex;gap:12px;align-items:center}
+    .logo .mark{width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:white}
+    nav{display:flex;gap:14px;align-items:center}
+    .btn{background:var(--accent);padding:10px 16px;border-radius:10px;color:white;font-weight:600;border:0;cursor:pointer}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06)}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:24px;align-items:center;margin:28px 0}
+    .hero .left h1{font-size:28px;margin:0 0 12px}
+    .hero .left p{color:var(--muted);margin:0 0 18px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .features{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .feature{padding:10px 12px;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02);font-size:14px}
+    .packages{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+    .package{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.012), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);text-align:center}
+    .package h3{margin:8px 0;font-size:18px}
+    .price{font-size:22px;font-weight:800;margin-bottom:8px}
+    .small{font-size:13px;color:var(--muted)}
+    .info-row{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+    .info-item{flex:1;min-width:200px}
+    footer{margin-top:28px;padding:18px;border-radius:12px;background:rgba(255,255,255,0.02);display:flex;justify-content:space-between;align-items:center}
+    .whatsapp{position:fixed;right:18px;bottom:18px;background:#25D366;border-radius:50%;width:56px;height:56px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(2,6,23,0.6);font-weight:700;color:white}
+    @media (max-width:900px){.hero{grid-template-columns:1fr}.packages{grid-template-columns:repeat(2,1fr)}.hero .left h1{font-size:22px}}
+    @media (max-width:560px){.packages{grid-template-columns:1fr}}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Fast TV Créditos — Recargas</title>
+  <meta name="description" content="Recarga créditos para tu servicio de streaming Fast TV. Compra paquetes y paga con Mercado Pago o BBVA.">
+  <style>
+    :root {
+      --accent: #e11d48;
+      --accent-2: #1e40af;
+      --bg: #0f172a;
+      --card: #0b1220;
+      --muted: #94a3b8;
+      --glass: rgba(255,255,255,0.05);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto;
+      background: linear-gradient(180deg,#041024 0%,#07122a 100%);
+      color: #e6eef8;
+    }
+    .container { max-width: 1100px; margin: 24px auto; padding: 24px; }
+    header { display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; gap: 12px; align-items: center; }
+    .mark {
+      width: 46px; height: 46px; border-radius: 8px;
+      background: linear-gradient(135deg,var(--accent),var(--accent-2));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; color: white;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      margin-top: 8px;
+      background: var(--accent);
+      padding: 10px 14px;
+      border-radius: 10px;
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+    .btn.bbva { background: #004481; }
+    .btn.mercado { background: #009ee3; }
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 18px;
+      border-radius: 14px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .packages { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 14px; margin-top: 12px; }
+    .package { text-align: center; padding: 16px; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); }
+    .price { font-size: 22px; font-weight: 800; margin: 4px 0 8px; }
+    .small { font-size: 13px; color: var(--muted); }
+    footer { margin-top: 40px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: var(--muted); font-size: 13px; }
+
+
+    /* BOTÓN flotante de WhatsApp */
+    .whatsapp {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: #25D366;
+      border-radius: 50px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.6);
+      color: white;
+      font-weight: 700;
+      text-decoration: none;
+      gap: 8px;
+      transition: 0.3s;
+    }
+    .whatsapp:hover {
+      background: #1ebe5d;
+      transform: scale(1.05);
+    }
+    .whatsapp span {
+      font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="container">
+  <header>
+    <div class="logo">
+      <div class="mark">FT</div>
+      <div>
+        <div style="font-weight:800">Fast TV</div>
+        <div style="font-size:12px;color:var(--muted)">Créditos y Recargas</div>
+      </div>
+    </div>
+  </header>
+ <section class="hero">
+      <div class="left">
+        <h1>Recarga tus créditos y disfruta de todo el contenido sin límites</h1>
+        <p>Compra paquetes y recibe tu acceso activado vía WhatsApp en minutos.</p>
+
+
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div>
+              <div style="font-weight:700">1 crédito = 1 mes</div>
+              <div class="small">Usa tu crédito en cualquier dispositivo: Smart TV, Fire Stick, Android TV, Chromecast</div>
+            </div>
+            <div style="text-align:right">
+              <div style="font-size:12px;color:var(--muted)">Soporte</div>
+              <div style="font-weight:700">WhatsApp: +52 232 145 2268</div>
+            </div>
+          </div>
+
+
+          <div class="features" style="margin-top:14px">
+            <div class="feature">2,400+ canales</div>
+            <div class="feature">20,000 películas</div>
+            <div class="feature">5,000 series</div>
+            <div class="feature">Deportes en vivo</div>
+          </div>
+        </div>
+
+
+        <div id="credits" class="card" style="margin-top:14px">
+          <h2 style="margin:0 0 8px">Paquetes de créditos</h2>
+          <p class="small">Escoge un paquete y haz clic en "Comprar" para contactarnos por WhatsApp.</p>
+
+
+  <section class="card">
+    <h2 style="text-align:center">Paquetes de Créditos</h2>
+    <p class="small" style="text-align:center;">Elige tu método de pago: Mercado Pago o Transferencia BBVA.</p>
+
+
+    <div class="packages">
+
+
+      <!-- Paquete 1 -->
+      <div class="package">
+        <h3>1 Crédito</h3>
+        <div class="price">$130 MXN</div>
+        <p class="small">1 mes de acceso</p>
+        <a class="btn mercado" href="https://mpago.la/1XuCW2t">💳 Pagar con Mercado Pago</a>
+        <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%201%20cr%C3%A9dito.">🏦 Pagar con BBVA Bancomer</a>
+      </div>
+
+
+      <!-- Paquete 2 -->
+      <div class="package">
+        <h3>3 Créditos</h3>
+        <div class="price">$350 MXN</div>
+        <p class="small">Ahorra $40</p>
+        <a class="btn mercado" href="https://mpago.la/1rxskph">💳 Pagar con Mercado Pago</a>
+        <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%203%20cr%C3%A9ditos.">🏦 Pagar con BBVA Bancomer</a>
+      </div>
+
+
+      <!-- Paquete 3 -->
+      <div class="package">
+        <h3>6 Créditos</h3>
+        <div class="price">$650 MXN</div>
+        <p class="small">Ahorra $130</p>
+        <a class="btn mercado" href="https://mpago.la/2UMVUJq">💳 Pagar con Mercado Pago</a>
+        <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%206%20cr%C3%A9ditos.">🏦 Pagar con BBVA Bancomer</a>
+      </div>
+
+
+    </div>
+  </section>
+
+
+<footer>
+      <div>
+        <strong>Fast TV Créditos</strong>
+        <div style="font-size:13px;color:var(--muted)">© 2025 Fast TV. Todos los derechos reservados.</div>
+      </div>
+      <div style="font-size:13px;color:var(--muted)">WhatsApp: <a href="https://wa.me/522321452268">+52 232 145 2268</a></div>
+  <!-- Botón flotante de WhatsApp -->
+  <a id="waFloat" class="whatsapp" href="https://wa.me/522321452268?text=Hola,%20vengo%20desde%20la%20página%20web%20y%20quiero%20un%20demo%20Fast%20para probrar." title="Escríbenos por WhatsApp">
+    💬
+  </a>
+</body>
+</html>
+    </footer>
+  </div>
+
+
