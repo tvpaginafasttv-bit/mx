@@ -34,8 +34,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Fast TV Créditos — Recargas</title>
   <meta name="description" content="Recarga créditos para tu servicio de streaming Fast TV. Compra paquetes y paga con Mercado Pago o BBVA.">
-  <style>
-    :root {
+ 
+ :root {
       --accent: #e11d48;
       --accent-2: #1e40af;
       --bg: #0f172a;
@@ -113,32 +113,36 @@
     .whatsapp span {
       font-size: 15px;
     }
-  </style>
+</style>
 </head>
 <body>
 
 
 <div class="container">
-  <header>
-    <div class="logo">
-      <div class="mark">FT</div>
-      <div>
-        <div style="font-weight:800">Fast TV</div>
-        <div style="font-size:12px;color:var(--muted)">Créditos</div>
+     <header>
+      <div class="logo">
+        <div class="mark">FT</div>
+        <div>
+          <div style="font-weight:800">Fast TV</div>
+          <div style="font-size:12px;color:var(--muted)">Créditos y Recargas</div>
+        </div>
       </div>
-    </div>
-  </header>
+      <nav>
+        <a class="btn" href="#credits">Comprar créditos</a>
+        <a class="btn secondary" href="#benefits">Beneficios</a>
+      </nav>
+    </header>
  <section class="hero">
       <div class="left">
         <h1>Recarga tus créditos y disfruta de todo el contenido sin límites</h1>
-        <p>Compra paquetes y recibe tu acceso activado vía WhatsApp en minutos pagos 100% seguros.</p>
+        <p>Compra paquetes y recibe tu acceso activado vía WhatsApp en minutos.</p>
 
 
         <div class="card">
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div>
               <div style="font-weight:700">1 crédito = 1 mes</div>
-              <div class="small">Usa tu crédito en cualquier dispositivo:TV Box, Fire Stick, Android TV, Chromecast</div>
+              <div class="small">Usa tu crédito en cualquier dispositivo: Smart TV, Fire Stick, Android TV, Chromecast</div>
             </div>
             <div style="text-align:right">
               <div style="font-size:12px;color:var(--muted)">Soporte</div>
@@ -148,7 +152,7 @@
 
 
           <div class="features" style="margin-top:14px">
-            <div class="feature">+2,400 canales</div>
+            <div class="feature">2,400+ canales</div>
             <div class="feature">20,000 películas</div>
             <div class="feature">5,000 series</div>
             <div class="feature">Deportes en vivo</div>
@@ -158,7 +162,7 @@
 
         <div id="credits" class="card" style="margin-top:14px">
           <h2 style="margin:0 0 8px">Paquetes de créditos</h2>
-          <p class="small">Escoge un paquete y haz clic en "pagar en mercado pago o BBVA" Cuando realices tu pago me mandas una captura para activar tus datos.</p>
+          <p class="small">Escoge un paquete y haz clic en "Comprar" para contactarnos por WhatsApp.</p>
 
 
   <section class="card">
@@ -197,6 +201,44 @@
         <a class="btn mercado" href="https://mpago.la/2UMVUJq">💳 Pagar con Mercado Pago</a>
         <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%206%20cr%C3%A9ditos.">🏦 Pagar con BBVA Bancomer</a>
       </div>
+           <div class="info-row">
+          <div class="card info-item">
+            <h4 style="margin:0 0 8px">Cómo funciona</h4>
+            <p class="small">Elige un paquete → Escríbenos por WhatsApp → Envía tu comprobante → Activamos tu cuenta en menos de 30 minutos.</p>
+          </div>
+
+
+          <div class="card info-item">
+            <h4 style="margin:0 0 8px">Soporte</h4>
+            <p class="small">¿Dudas? Escríbenos por WhatsApp al +52 232 145 2268 y te ayudamos a activar tu cuenta.</p>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="card">
+          <h3 style="margin:0 0 8px">Demo / Acceso rápido</h3>
+          <p class="small">Pide una demo gratis por WhatsApp y recibe acceso temporal.</p>
+
+
+          <div style="margin-top:12px">
+            <a class="btn" href="https://wa.me/522321452268?text=Hola,%20vengo%20desde%20la%20página%20web%20y%20quiero%20una%20demo%20de%20Fast%20TV.">Pedir demo por WhatsApp</a>
+            <a class="btn secondary" style="margin-left:8px" href="https://wa.me/522321452268?text=Hola,%20vengo%20desde%20la%20página%20web%20y%20necesito%20soporte%20para%20Fast%20TV.">Soporte</a>
+          </div>
+        </div>
+      </aside>
+
+
+     <section id="benefits" class="card">
+      <h3 style="margin:0 0 8px">Beneficios</h3>
+      <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+        <li>Compatible con múltiples dispositivos</li>
+        <li>Entrega rápida y activación vía WhatsApp</li>
+        <li>Planes flexibles y descuentos en paquetes</li>
+      </ul>
+    </section>
+
+
 
 
     </div>
@@ -209,12 +251,11 @@
         <div style="font-size:13px;color:var(--muted)">© 2025 Fast TV. Todos los derechos reservados.</div>
       </div>
       <div style="font-size:13px;color:var(--muted)">WhatsApp: <a href="https://wa.me/522321452268">+52 232 145 2268</a></div>
+  <!-- Botón flotante de WhatsApp -->
+  <a id="waFloat" class="whatsapp" href="https://wa.me/522321452268?text=Hola,%20vengo%20desde%20la%20página%20web%20y%20quiero%20un%20demo%20Fast%20para probrar." title="Escríbenos por WhatsApp">
+    💬
   </a>
 </body>
 </html>
     </footer>
   </div>
-
-
-
-
