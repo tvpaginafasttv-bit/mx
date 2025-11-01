@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fast TV Créditos Premium</title>
+<meta name="description" content="Recarga créditos para Fast TV y disfruta contenido ilimitado con activación inmediata vía WhatsApp.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --accent: #e11d48;
+  --accent-2: #1e40af;
+  --bg: #0b0f1a;
+  --card: rgba(15,23,30,0.85);
+  --muted: #94a3b8;
+  --glass: rgba(255,255,255,0.03);
+  --transition-speed: 0.35s;
+}
+
+/* RESET Y BODY */
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Inter',sans-serif;
+  background: radial-gradient(circle at top,#0b0f1a 0%,#01040a 100%);
+  color:#e6eef8;
+  overflow-x:hidden;
+  scroll-behavior:smooth;
+  position:relative;
+  z-index:0;
+}
+
+/* FONDO GIF ANIMADO DE HALLOWEEN */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://i.pinimg.com/originals/f6/72/ce/f672ce953801e8bb44132d5c938c4f85.gif') center center / cover no-repeat;
+  z-index: -2;
+  opacity: 0.4; /* Puedes ajustar la opacidad si quieres más o menos visible */
+}
+
+/* CANVAS DE PARTICULAS NEON */
+canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+
+/* HEADER */
+header{
+  position:fixed; top:0; left:0; right:0; z-index:999;
+  backdrop-filter:blur(12px);
+  background: rgba(15,23,30,0.85);
+  display:flex; justify-content: space-between; align-items:center; padding:12px 24px;
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.logo{display:flex;align-items:center;gap:10px;}
+.mark{
+  width:44px;height:44px;
+  border-radius:10px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));
+  display:flex;justify-content:center;align-items:center;
+  font-weight:700;color:white;font-size:18px;
+  transition: transform 0.3s, box-shadow 0.5s;
+}
+.mark:hover{transform:scale(1.15) rotate(10deg);box-shadow:0 0 25px var(--accent);}
+nav{display:flex;gap:12px;flex-wrap:wrap;}
+.btn{
+  padding:10px 18px;border-radius:12px;font-weight:600;cursor:pointer;
+  border:none;color:white;text-decoration:none;display:inline-block;
+  background: var(--accent); transition: all 0.3s ease, box-shadow 0.6s;
+}
+.btn:hover{
+  transform: translateY(-2px) scale(1.05);
+  box-shadow:0 0 28px var(--accent),0 0 56px var(--accent-2);
+}
+.btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.2);}
+.btn.promocion{background:#ff6f61;}
+.btn.bbva{background:#004481;}
+.btn.mercado{background:#009ee3;}
+
+/* CONTAINER */
+.container{max-width:1100px;margin:170px auto 14px;padding:0 14px;position:relative; z-index:1;}
+
+/* HERO */
+.hero{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;}
+.hero-left{flex:1; animation:fadeInUp 1s ease forwards; opacity:0;}
+.hero-left h1{
+  font-size:32px;
+  margin-bottom:12px;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-left p{color:var(--muted); margin-bottom:18px;}
+
+/* CARD */
+.card{
+  background: var(--card); border-radius:16px; padding:22px;
+  box-shadow:0 10px 28px rgba(2,6,23,0.8);
+  border:1px solid rgba(255,255,255,0.03);
+  transition: all 0.4s ease;
+  transform: translateY(20px); opacity:0;
+  position:relative;
+  overflow:hidden;
+}
+.card.show{opacity:1; transform:translateY(0);}
+.card::before{
+  content:"";
+  position:absolute; top:-50%; left:-50%;
+  width:200%; height:200%;
+  background: linear-gradient(120deg, rgba(255,29,72,0.2), rgba(30,64,175,0.2), rgba(255,29,72,0.2));
+  animation: rotateGlow 6s linear infinite;
+  pointer-events:none;
+  z-index:0;
+}
+@keyframes rotateGlow{
+  0%{transform:rotate(0deg) translateX(0) rotate(0deg);}
+  100%{transform:rotate(360deg) translateX(0) rotate(-360deg);}
+}
+
+/* FEATURES */
+.features{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;}
+.feature{padding:10px 14px;border-radius:12px;background:var(--glass);
+border:1px solid rgba(255,255,255,0.02);font-size:14px;transition:all 0.3s;}
+.feature:hover{background: rgba(255,255,255,0.08); transform: translateY(-2px);}
+
+/* PACKAGES PREMIUM */
+.packages{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;margin-top:16px;}
+.package{
+  padding:20px;border-radius:16px;text-align:center;border:1px solid rgba(255,255,255,0.03);
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02));
+  position:relative; overflow:hidden; cursor:pointer;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+.package::before{
+  content:""; position:absolute; top:0; left:-50%; width:200%; height:100%;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.15), transparent);
+  transform: skewX(-25deg);
+  transition: all 0.7s;
+  z-index:0;
+}
+.package:hover::before{left:100%;}
+.package:hover{transform: translateY(-10px) scale(1.05); box-shadow:0 0 38px var(--accent),0 0 70px var(--accent-2);}
+.package .description{opacity:0; transform:translateY(10px); transition: all 0.4s; font-size:14px; color:var(--muted);}
+.package:hover .description{opacity:1; transform:translateY(0); z-index:1;}
+.package .btn{margin-top:8px; transition: all 0.3s ease, box-shadow 0.5s;}
+.package .btn:hover{box-shadow:0 0 38px var(--accent),0 0 70px var(--accent-2); transform: scale(1.05);}
+
+/* INFO ROW */
+.info-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;}
+.info-item{flex:1;min-width:220px;}
+
+/* FOOTER */
+footer{margin-top:32px;padding:20px;border-radius:12px;background: rgba(255,255,255,0.02);
+display:flex;justify-content: space-between; flex-wrap:wrap; color:var(--muted); font-size:13px;}
+
+/* WHATSAPP FLOAT */
+.whatsapp{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:50%;
+background:#25D366;display:flex;justify-content:center;align-items:center;
+font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: transform 0.3s, box-shadow 0.3s; z-index:1000;}
+.whatsapp:hover{transform: scale(1.2); box-shadow:0 12px 36px rgba(2,6,23,0.85);}
+
+/* ANIMACIONES */
+@keyframes fadeInUp{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
+
+/* --- Responsive para móvil --- */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  nav .btn {
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 8px;
+  }
+  .logo img {
+    width: 30px;
+    height: 30px;
+  }
+  .logo span {
+    font-size: 16px;
+  }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bgCanvas"></canvas>
+<div class="container">
+
+<header>
+  <div class="logo">
+    <div class="mark">FT</div>
+    <div>
+      <div style="font-weight:800;">Fast TV</div>
+      <div style="font-size:12px;color:var(--muted)">Créditos y Recargas</div>
+    </div>
+  </div>
+  <nav>
+    <a class="btn promocion" href="#promocion">Promoción</a>
+    <a class="btn" href="#credits">Comprar créditos</a>
+    <a class="btn secondary" href="#benefits">Beneficios</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-left">
+    <h1>Recarga tus créditos y disfruta de todo el contenido sin límites</h1>
+    <p>Compra paquetes y recibe tu acceso activado vía WhatsApp en minutos.</p>
+
+    <div class="card show">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <div style="font-weight:700;">1 crédito = 1 mes</div>
+          <div class="small">Compatible con TV Box, Fire Stick, Android TV, Chromecast, Roku</div>
+        </div>
+        <div style="text-align:right;">
+          <div class="small">pagos 100% seguros activamos entre 5 minutos a 10 minutos</div>
+          <div style="font-weight:700;"></div>
+        </div>
+      </div>
+      <div class="features">
+        <div class="feature">+2,400 canales</div>
+        <div class="feature">+20,000 películas</div>
+        <div class="feature">+5,000 series</div>
+        <div class="feature">Deportes en vivo</div>
+      </div>
+    </div>
+
+    <div id="credits" class="card show" style="margin-top:16px;">
+      <h2>Paquetes de créditos</h2>
+      <p class="small">Selecciona un paquete y compra mediante WhatsApp o Mercado Pago.</p>
+      <div class="packages">
+        <div class="package">
+          <h3>1 Crédito</h3>
+          <div class="price">$140 MXN</div>
+          <p class="description">1 mes de acceso completo a todos los canales.</p>
+          <a class="btn mercado" href="https://mpago.la/2yVCgh2">💳 Mercado Pago</a>
+          <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%201%20crédito.">🏦 BBVA</a>
+        </div>
+        <div class="package">
+          <h3>3 Créditos</h3>
+          <div class="price">$360 MXN</div>
+          <p class="description">Ahorra $40 y disfruta 3 meses de contenido ilimitado.</p>
+          <a class="btn mercado" href="https://mpago.la/2z6QZCW">💳 Mercado Pago</a>
+          <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%203%20créditos.">🏦 BBVA</a>
+        </div>
+        <div class="package">
+          <h3>6 Créditos</h3>
+          <div class="price">$660 MXN</div>
+          <p class="description">Ahorra $130 y disfruta 6 meses de contenido premium.</p>
+          <a class="btn mercado" href="https://mpago.la/2ExEasd">💳 Mercado Pago</a>
+          <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%206%20créditos.">🏦 BBVA</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section id="" class="card show" style="margin-top:24px;">
+  <h3>Soporte</h3>
+  <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+    <li>Problemas de conexión o acceso a tu cuenta.</li>
+        <li>Fallas en la reproducción o cortes en la señal.</li>
+        <li>Instalación y configuración de tu aplicación o dispositivo.</li>
+        <li>Renovación de servicio.</li>
+  </ul>
+  <div style="margin-top:12px">
+            
+            <a class="btn secondary" style="margin-left:8px" href="https://wa.me/522321452268?text=Hola,%20vengo%20desde%20la%20página%20web%20y%20necesito%20soporte%20para%20Fast%20TV.">Soporte</a>
+        </div>
+      </aside>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section id="benefits" class="card show" style="margin-top:24px;">
+  <h3>Beneficios</h3>
+  <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+    <li>Compatible con múltiples dispositivos</li>
+    <li>Entrega rápida y activación vía WhatsApp</li>
+    <li>Planes flexibles y descuentos en paquetes</li>
+  </ul>
+</section>
+
+<footer>
+  <div>
+    <strong>Fast TV Créditos</strong>
+    <div>© 2025 Fast TV. Todos los derechos reservados.</div>
+  </div>
+  <div> <a href=""></a></div>
+</footer>
+
+<a class="whatsapp" href="https://wa.me/522321452268">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1022px-WhatsApp.svg.png" alt="WhatsApp" style="width:28px; height:28px;">
+</a>
+
+
+
+<script>
+// Canvas de partículas neon
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let w=canvas.width=window.innerWidth;
+let h=canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; });
+
+class Particle{
+  constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.r=Math.random()*2+1;this.dx=(Math.random()-0.5)*0.5;this.dy=(Math.random()-0.5)*0.5;this.color=hsl(${Math.random()*360},80%,60%);}
+  update(){this.x+=this.dx; this.y+=this.dy; if(this.x<0)this.x=w;if(this.x>w)this.x=0;if(this.y<0)this.y=h;if(this.y>h)this.y=0;}
+  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.color;ctx.fill();}
+}
+const particles=[]; for(let i=0;i<250;i++)particles.push(new Particle());
+document.addEventListener('scroll',()=>{ const s=window.scrollY/150; particles.forEach(p=>{p.x+=p.dx*s;p.y+=p.dy*s;}); });
+function animate(){ctx.clearRect(0,0,w,h); particles.forEach(p=>p.update(),p.draw()); requestAnimationFrame(animate);}
+animate();
+
+// Animación de tarjetas
+const observer = new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting) entry.target.classList.add('show');});},{threshold:0.2});
+document.querySelectorAll('.card, .package, .hero-left').forEach(c=>observer.observe(c));
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
