@@ -31,16 +31,7 @@ body{
 }
 
 /* FONDO GIF ANIMADO DE HALLOWEEN */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: url('https://i.pinimg.com/originals/f6/72/ce/f672ce953801e8bb44132d5c938c4f85.gif') center center / cover no-repeat;
-  z-index: -2;
-  opacity: 0.4; /* Puedes ajustar la opacidad si quieres más o menos visible */
-}
+
 
 /* CANVAS DE PARTICULAS NEON */
 canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
@@ -355,6 +346,7 @@ document.querySelectorAll('.card, .package, .hero-left').forEach(c=>observer.obs
 
 </body>
 </html>
+
 
 
 
