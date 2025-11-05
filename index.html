@@ -377,9 +377,11 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
 </section>
 
 
-  <!-- Calificación Netflix -->
+<!-- ⭐ CLASIFICACIÓN Y EXPERIENCIA DE CLIENTE -->
+<section id="rating" class="card show" style="margin-top:24px;">
+  <h3>Califica esta página</h3>
+
   <div class="rating-container">
-    <h3 style="color:white; margin-bottom:10px;">Califica nuestro servicio Fast TV</h3>
     <div class="stars">
       <span class="star" data-value="1">★</span>
       <span class="star" data-value="2">★</span>
@@ -387,27 +389,21 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
       <span class="star" data-value="4">★</span>
       <span class="star" data-value="5">★</span>
     </div>
-    <div class="rating-text">4.8 / 5 basado en la opinión de nuestros clientes</div>
-    <div class="rating-message" id="ratingMessage">¡Gracias por tu calificación!</div>
+    <div id="ratingMessage" class="rating-message">¡Gracias por tu calificación!</div>
+  </div>
+
+  <div style="margin-top:20px; text-align:center;">
+    <textarea id="experienceInput" placeholder="Describe tu experiencia..." rows="3"
+      style="width:90%;max-width:500px;border-radius:12px;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:white;"></textarea><br>
+    <button id="saveExperience" class="btn" style="margin-top:10px;">Guardar experiencia</button>
+    <div id="savedMessage" style="color:gold;margin-top:8px;opacity:0;transition:opacity 0.4s;">Experiencia guardada</div>
+  </div>
+
+  <div id="experienceDisplay" style="display:none; margin-top:16px; background:rgba(255,255,255,0.05); border-radius:12px; padding:12px;">
+    <strong>Tu experiencia:</strong>
+    <p id="experienceText" style="margin-top:6px;color:#e2e8f0;"></p>
   </div>
 </section>
-
-  <!-- Cuadro de experiencia debajo de las estrellas -->
-
-  <div class="experience-container" style="margin-top:25px; text-align:center;">
-    <h3 style="color:white;">Describe tu experiencia</h3>
-    <textarea id="experienceInput" placeholder="Escribe aquí tu experiencia con Fast TV..." 
-      style="width:90%; max-width:500px; height:100px; padding:10px; border-radius:10px;
-      border:none; background:rgba(255,255,255,0.08); color:white; resize:none; outline:none;"></textarea>
-    <br>
-    <button id="saveExperience" 
-      style="margin-top:10px; background:var(--accent); border:none; padding:10px 20px;
-      border-radius:8px; color:white; font-weight:600; cursor:pointer;">Guardar experiencia</button>
-    <div id="savedMessage" 
-      style="opacity:0; color:gold; margin-top:6px; font-weight:bold; transition:opacity 0.4s;">
-      ¡Tu experiencia ha sido guardada!
-    </div>
-
 
 
 
@@ -449,31 +445,8 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
 
 
 
+<!-- Script para calificación con estrellas y guardar experiencia -->
 <script>
-// Canvas de partículas neon
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-let w=canvas.width=window.innerWidth;
-let h=canvas.height=window.innerHeight;
-window.addEventListener('resize',()=>{ w=canvas.width=window.innerWidth; h=canvas.height=window.innerHeight; });
-
-class Particle{
-  constructor(){this.x=Math.random()*w;this.y=Math.random()*h;this.r=Math.random()*2+1;this.dx=(Math.random()-0.5)*0.5;this.dy=(Math.random()-0.5)*0.5;this.color=hsl(${Math.random()*360},80%,60%);}
-  update(){this.x+=this.dx; this.y+=this.dy; if(this.x<0)this.x=w;if(this.x>w)this.x=0;if(this.y<0)this.y=h;if(this.y>h)this.y=0;}
-  draw(){ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fillStyle=this.color;ctx.fill();}
-}
-const particles=[]; for(let i=0;i<250;i++)particles.push(new Particle());
-document.addEventListener('scroll',()=>{ const s=window.scrollY/150; particles.forEach(p=>{p.x+=p.dx*s;p.y+=p.dy*s;}); });
-function animate(){ctx.clearRect(0,0,w,h); particles.forEach(p=>p.update(),p.draw()); requestAnimationFrame(animate);}
-animate();
-
-// Animación de tarjetas
-const observer = new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting) entry.target.classList.add('show');});},{threshold:0.2});
-document.querySelectorAll('.card, .package, .hero-left').forEach(c=>observer.observe(c));
-</script>
-
-<script>
-// Calificación interactiva con guardado local
 const stars = document.querySelectorAll('.star');
 const msg = document.getElementById('ratingMessage');
 let saved = localStorage.getItem('fasttv_rating');
@@ -493,11 +466,8 @@ stars.forEach(star=>{
     setTimeout(()=>msg.style.opacity=0, 2000);
   });
 });
-</script>
 
-
-<script>
-// Guardar experiencia debajo de las estrellas
+// Guardar experiencia
 const textarea = document.getElementById('experienceInput');
 const saveBtn = document.getElementById('saveExperience');
 const savedMsg = document.getElementById('savedMessage');
@@ -516,7 +486,7 @@ saveBtn.addEventListener('click', () => {
     localStorage.setItem('fasttv_experience', text);
     experienceText.textContent = text;
     experienceBox.style.display = 'block';
-    textarea.value = ""; // limpia el campo después de guardar
+    textarea.value = "";
     savedMsg.style.opacity = 1;
     setTimeout(() => savedMsg.style.opacity = 0, 2000);
   }
@@ -532,6 +502,30 @@ saveBtn.addEventListener('click', () => {
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
