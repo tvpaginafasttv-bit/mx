@@ -377,7 +377,7 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
 </section>
 
 
-<!-- ⭐ CLASIFICACIÓN Y EXPERIENCIA DE CLIENTE -->
+<!-- ⭐ CLASIFICACIÓN Y EXPERIENCIAS DE CLIENTES -->
 <section id="rating" class="card show" style="margin-top:24px;">
   <h3>Califica esta página</h3>
 
@@ -395,13 +395,14 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
   <div style="margin-top:20px; text-align:center;">
     <textarea id="experienceInput" placeholder="Describe tu experiencia..." rows="3"
       style="width:90%;max-width:500px;border-radius:12px;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:white;"></textarea><br>
-    <button id="saveExperience" class="btn" style="margin-top:10px;">Guardar experiencia</button>
-    <div id="savedMessage" style="color:gold;margin-top:8px;opacity:0;transition:opacity 0.4s;">Experiencia guardada</div>
+    <button id="saveExperience" class="btn" style="margin-top:10px;">Enviar reseña</button>
+    <div id="savedMessage" style="color:gold;margin-top:8px;opacity:0;transition:opacity 0.4s;">Gracias por tu opinión</div>
   </div>
 
-  <div id="experienceDisplay" style="display:none; margin-top:16px; background:rgba(255,255,255,0.05); border-radius:12px; padding:12px;">
-    <strong>Tu experiencia:</strong>
-    <p id="experienceText" style="margin-top:6px;color:#e2e8f0;"></p>
+  <!-- 📋 Aquí se mostrarán las reseñas de otros clientes -->
+  <div id="reviewsContainer" style="margin-top:24px;">
+    <h4>Opiniones de otros clientes</h4>
+    <div id="reviewsList" style="margin-top:12px;"></div>
   </div>
 </section>
 
@@ -444,56 +445,83 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
 </a>
 
 
-
-<!-- Script para calificación con estrellas y guardar experiencia -->
+<!-- ⭐ Script para guardar y mostrar reseñas desde Google Sheets -->
 <script>
+const scriptURL = "https://script.google.com/macros/s/AKfycbwK2F8RBptjaHj1BK83SExjBLJ1CWCqR10t2w3XZX6WPrQimFcmE5TCF65KIbmSs6D7kw/exec";
+
 const stars = document.querySelectorAll('.star');
 const msg = document.getElementById('ratingMessage');
-let saved = localStorage.getItem('fasttv_rating');
-
-function highlight(r){
-  stars.forEach(s => s.classList.toggle('active', s.dataset.value <= r));
-}
-
-if(saved){ highlight(saved); }
-
-stars.forEach(star=>{
-  star.addEventListener('click',()=>{
-    const rating = star.dataset.value;
-    localStorage.setItem('fasttv_rating', rating);
-    highlight(rating);
-    msg.style.opacity=1;
-    setTimeout(()=>msg.style.opacity=0, 2000);
-  });
-});
-
-// Guardar experiencia
 const textarea = document.getElementById('experienceInput');
 const saveBtn = document.getElementById('saveExperience');
 const savedMsg = document.getElementById('savedMessage');
-const experienceBox = document.getElementById('experienceDisplay');
-const experienceText = document.getElementById('experienceText');
-const storedExp = localStorage.getItem('fasttv_experience');
+const reviewsList = document.getElementById('reviewsList');
 
-if (storedExp) {
-  experienceText.textContent = storedExp;
-  experienceBox.style.display = 'block';
+let selectedRating = 0;
+
+// --- Calificación por estrellas ---
+stars.forEach(star => {
+  star.addEventListener('click', () => {
+    selectedRating = star.dataset.value;
+    stars.forEach(s => s.classList.toggle('active', s.dataset.value <= selectedRating));
+  });
+});
+
+// --- Enviar reseña a Google Sheets ---
+saveBtn.addEventListener('click', () => {
+  const comentario = textarea.value.trim();
+  if (!selectedRating || comentario === "") {
+    alert("Por favor califica y escribe tu experiencia antes de enviar.");
+    return;
+  }
+
+  const data = new FormData();
+  data.append("Calificacion", selectedRating);
+  data.append("Comentario", comentario);
+  data.append("Fecha", new Date().toLocaleString("es-MX"));
+
+  fetch(scriptURL, { method: 'POST', body: data })
+    .then(res => res.text())
+    .then(() => {
+      savedMsg.style.opacity = 1;
+      setTimeout(() => savedMsg.style.opacity = 0, 2000);
+      textarea.value = "";
+      selectedRating = 0;
+      stars.forEach(s => s.classList.remove('active'));
+      loadReviews(); // actualiza la lista
+    })
+    .catch(err => alert("Error al guardar la reseña. Intenta más tarde."));
+});
+
+// --- Mostrar reseñas desde Google Sheets ---
+function loadReviews() {
+  fetch(scriptURL)
+    .then(res => res.json())
+    .then(data => {
+      reviewsList.innerHTML = "";
+      if (data.length === 0) {
+        reviewsList.innerHTML = "<p style='color:gray;'>Aún no hay reseñas.</p>";
+        return;
+      }
+      data.reverse().forEach(row => {
+        const div = document.createElement("div");
+        div.style.background = "rgba(255,255,255,0.05)";
+        div.style.border = "1px solid rgba(255,255,255,0.1)";
+        div.style.borderRadius = "12px";
+        div.style.padding = "10px";
+        div.style.marginBottom = "10px";
+        div.innerHTML = `
+          <div style="color:gold;">${'★'.repeat(row.Calificacion)}${'☆'.repeat(5 - row.Calificacion)}</div>
+          <p style="margin:5px 0;">${row.Comentario}</p>
+          <small style="color:gray;">${row.Fecha}</small>
+        `;
+        reviewsList.appendChild(div);
+      });
+    })
+    .catch(err => console.log("Error al cargar reseñas:", err));
 }
 
-saveBtn.addEventListener('click', () => {
-  const text = textarea.value.trim();
-  if (text) {
-    localStorage.setItem('fasttv_experience', text);
-    experienceText.textContent = text;
-    experienceBox.style.display = 'block';
-    textarea.value = "";
-    savedMsg.style.opacity = 1;
-    setTimeout(() => savedMsg.style.opacity = 0, 2000);
-  }
-});
+loadReviews();
 </script>
-
-
 
 
 
@@ -502,6 +530,63 @@ saveBtn.addEventListener('click', () => {
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
