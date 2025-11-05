@@ -392,11 +392,37 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
   </div>
 </section>
 
+  <!-- Cuadro de experiencia debajo de las estrellas -->
+
+  <div class="experience-container" style="margin-top:25px; text-align:center;">
+    <h3 style="color:white;">Describe tu experiencia</h3>
+    <textarea id="experienceInput" placeholder="Escribe aquí tu experiencia con Fast TV..." 
+      style="width:90%; max-width:500px; height:100px; padding:10px; border-radius:10px;
+      border:none; background:rgba(255,255,255,0.08); color:white; resize:none; outline:none;"></textarea>
+    <br>
+    <button id="saveExperience" 
+      style="margin-top:10px; background:var(--accent); border:none; padding:10px 20px;
+      border-radius:8px; color:white; font-weight:600; cursor:pointer;">Guardar experiencia</button>
+    <div id="savedMessage" 
+      style="opacity:0; color:gold; margin-top:6px; font-weight:bold; transition:opacity 0.4s;">
+      ¡Tu experiencia ha sido guardada!
+    </div>
 
 
 
 
 
+<!-- Mostrar experiencia guardada -->
+<div id="experienceDisplay" 
+  style="display:none; margin-top:20px; background:rgba(255,255,255,0.05); 
+  border-radius:10px; padding:15px; max-width:500px; margin-inline:auto;">
+  <h4 style="color:gold;">Tu experiencia:</h4>
+  <p id="experienceText" style="color:white; white-space:pre-line;"></p>
+</div>
+
+
+  </div>
+</div>
 
 
 
@@ -469,8 +495,72 @@ stars.forEach(star=>{
 });
 </script>
 
+
+<script>
+// Guardar experiencia debajo de las estrellas
+const textarea = document.getElementById('experienceInput');
+const saveBtn = document.getElementById('saveExperience');
+const savedMsg = document.getElementById('savedMessage');
+const experienceBox = document.getElementById('experienceDisplay');
+const experienceText = document.getElementById('experienceText');
+const storedExp = localStorage.getItem('fasttv_experience');
+
+if (storedExp) {
+  experienceText.textContent = storedExp;
+  experienceBox.style.display = 'block';
+}
+
+saveBtn.addEventListener('click', () => {
+  const text = textarea.value.trim();
+  if (text) {
+    localStorage.setItem('fasttv_experience', text);
+    experienceText.textContent = text;
+    experienceBox.style.display = 'block';
+    textarea.value = ""; // limpia el campo después de guardar
+    savedMsg.style.opacity = 1;
+    setTimeout(() => savedMsg.style.opacity = 0, 2000);
+  }
+});
+</script>
+
+
+
+
+
+
+
+
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
