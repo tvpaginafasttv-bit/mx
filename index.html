@@ -133,6 +133,50 @@ nav{display:flex;gap:12px;flex-wrap:wrap;}
   100%{transform:rotate(360deg) translateX(0) rotate(-360deg);}
 }
 
+/* SISTEMA DE CALIFICACIÓN */
+.rating-container {
+  text-align: center;
+  margin-top: 30px;
+}
+.stars {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.star {
+  font-size: 42px;
+  color: rgba(255,255,255,0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, text-shadow 0.4s, color 0.3s;
+}
+.star.active, .star:hover {
+  color: gold;
+  transform: scale(1.25);
+  text-shadow: 0 0 15px gold, 0 0 25px var(--accent), 0 0 35px var(--accent-2);
+}
+.star:active {transform: scale(1.1);}
+.rating-text {
+  font-size: 16px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+.rating-message {
+  font-size: 15px;
+  color: gold;
+  opacity: 0;
+  transition: opacity 0.5s;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+
+
+
+
+
+
+
 /* FEATURES */
 .features{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;}
 .feature{padding:10px 14px;border-radius:12px;background:var(--glass);
@@ -332,6 +376,39 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
   </ul>
 </section>
 
+
+  <!-- Calificación Netflix -->
+  <div class="rating-container">
+    <h3 style="color:white; margin-bottom:10px;">Califica nuestro servicio Fast TV</h3>
+    <div class="stars">
+      <span class="star" data-value="1">★</span>
+      <span class="star" data-value="2">★</span>
+      <span class="star" data-value="3">★</span>
+      <span class="star" data-value="4">★</span>
+      <span class="star" data-value="5">★</span>
+    </div>
+    <div class="rating-text">4.8 / 5 basado en la opinión de nuestros clientes</div>
+    <div class="rating-message" id="ratingMessage">¡Gracias por tu calificación!</div>
+  </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <footer>
   <div>
     <strong>Fast TV Créditos</strong>
@@ -369,71 +446,31 @@ const observer = new IntersectionObserver(entries=>{entries.forEach(entry=>{if(e
 document.querySelectorAll('.card, .package, .hero-left').forEach(c=>observer.observe(c));
 </script>
 
+<script>
+// Calificación interactiva con guardado local
+const stars = document.querySelectorAll('.star');
+const msg = document.getElementById('ratingMessage');
+let saved = localStorage.getItem('fasttv_rating');
+
+function highlight(r){
+  stars.forEach(s => s.classList.toggle('active', s.dataset.value <= r));
+}
+
+if(saved){ highlight(saved); }
+
+stars.forEach(star=>{
+  star.addEventListener('click',()=>{
+    const rating = star.dataset.value;
+    localStorage.setItem('fasttv_rating', rating);
+    highlight(rating);
+    msg.style.opacity=1;
+    setTimeout(()=>msg.style.opacity=0, 2000);
+  });
+});
+</script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
