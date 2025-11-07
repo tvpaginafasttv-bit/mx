@@ -447,7 +447,7 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
 
 <!-- ⭐ Script para guardar y mostrar reseñas desde Google Sheets -->
 <script>
-const scriptURL = "https://script.google.com/macros/s/AKfycbzaDRugvoyVqnUbeV57qseEPUq9XY3HL1_HHhiQJ0SeNSdw3iLavirD31WES-W5vqj9sA/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbxPDCFTuOqJOQFP-GwkcEi8RXaI9TwvMpUcSQzqZaf8pDjmq6KnzDrLJBjbFi0YBaV6kg/exec"; // 👈 pega aquí tu URL del Apps Script
 
 const stars = document.querySelectorAll('.star');
 const msg = document.getElementById('ratingMessage');
@@ -474,34 +474,35 @@ saveBtn.addEventListener('click', () => {
     return;
   }
 
-  const data = new FormData();
-  data.append("Calificacion", selectedRating);
-  data.append("Comentario", comentario);
-  data.append("Fecha", new Date().toLocaleString("es-MX"));
+  const params = new URLSearchParams();
+  params.append("Calificacion", selectedRating);
+  params.append("Comentario", comentario);
+  params.append("Fecha", new Date().toLocaleString("es-MX"));
 
-  fetch(scriptURL, { method: 'POST', body: data })
-    .then(res => res.text())
+  fetch(scriptURL + "?" + params.toString(), { method: "POST" })
+    .then(r => r.text())
     .then(() => {
       savedMsg.style.opacity = 1;
       setTimeout(() => savedMsg.style.opacity = 0, 2000);
       textarea.value = "";
       selectedRating = 0;
       stars.forEach(s => s.classList.remove('active'));
-      loadReviews(); // actualiza la lista
+      loadReviews();
     })
-    .catch(err => alert("Error al guardar la reseña. Intenta más tarde."));
+    .catch(err => alert("Error al guardar reseña: " + err));
 });
 
-// --- Mostrar reseñas desde Google Sheets ---
+// --- Cargar reseñas ---
 function loadReviews() {
   fetch(scriptURL)
-    .then(res => res.json())
+    .then(r => r.json())
     .then(data => {
       reviewsList.innerHTML = "";
       if (data.length === 0) {
         reviewsList.innerHTML = "<p style='color:gray;'>Aún no hay reseñas.</p>";
         return;
       }
+
       data.reverse().forEach(row => {
         const div = document.createElement("div");
         div.style.background = "rgba(255,255,255,0.05)";
@@ -529,142 +530,4 @@ loadReviews();
 
 
 </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      </html>
