@@ -489,5 +489,35 @@ function loadReviews() {
 }
 
 // pequeña función para escapar HTML y evitar inyección al mostrar comentarios
-function escapeHtml(str
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"'`=\/]/g, function(s) {
+    return {
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","/":"&#x2F;","`":"&#x60;","=":"&#x3D;"
+    }[s];
+  });
+}
+
+loadReviews();
+
+/* Opcional: guardar la experiencia localmente y mostrarla */
+const experienceDisplay = document.getElementById('experienceDisplay');
+const experienceText = document.getElementById('experienceText');
+
+if (localStorage.getItem('fasttv_experience')) {
+  experienceText.textContent = localStorage.getItem('fasttv_experience');
+  experienceDisplay.style.display = 'block';
+}
+
+saveBtn.addEventListener('click', () => {
+  const comment = textarea.value.trim();
+  if (comment) {
+    localStorage.setItem('fasttv_experience', comment);
+    experienceText.textContent = comment;
+    experienceDisplay.style.display = 'block';
+  }
+});
+</script>
+
+</body>
+</html>
 
