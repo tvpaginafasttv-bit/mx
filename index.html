@@ -411,21 +411,76 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
     </div>
   </div>
 
+   <!-- Soporte -->
+  <section id="soporte" class="card show" style="margin-top:22px; width:100%;">
+    <h3>Soporte</h3>
+    <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+      <li>Problemas de conexión o acceso a tu cuenta.</li>
+      <li>Fallas en la reproducción o cortes en la señal.</li>
+      <li>Instalación y configuración de tu aplicación o dispositivo.</li>
+      <li>Renovación de servicio.</li>
+    </ul>
+    <div style="margin-top:12px;">
+      <a class="btn secondary" style="margin-left:8px" href="https://wa.me/522321452268?text=Hola,%20vengo%20desde%20la%20página%20web%20y%20necesito%20soporte%20para%20Fast%20TV.">Soporte</a>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section id="benefits" class="card show" style="margin-top:24px; width:100%;">
+    <h3>Beneficios</h3>
+    <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+      <li>Compatible con múltiples dispositivos</li>
+      <li>Entrega rápida y activación vía WhatsApp</li>
+      <li>Planes flexibles y descuentos en paquetes</li>
+    </ul>
+  </section>
+
+  <!-- RATING / RESEÑAS -->
+  <section id="rating" class="card show" style="margin-top:24px; width:100%;">
+    <h3>Califica esta página</h3>
+
+    <div class="rating-container">
+      <div class="stars" aria-hidden="false" role="radiogroup">
+        <span class="star" data-value="1" role="radio" aria-checked="false">★</span>
+        <span class="star" data-value="2" role="radio" aria-checked="false">★</span>
+        <span class="star" data-value="3" role="radio" aria-checked="false">★</span>
+        <span class="star" data-value="4" role="radio" aria-checked="false">★</span>
+        <span class="star" data-value="5" role="radio" aria-checked="false">★</span>
+      </div>
+      <div id="ratingMessage" class="rating-message">¡Gracias por tu calificación!</div>
+    </div>
+
+    <div style="margin-top:20px; text-align:center;">
+      <textarea id="experienceInput" placeholder="Describe tu experiencia..." rows="3"
+        style="width:90%;max-width:500px;border-radius:12px;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:white;"></textarea><br>
+      <button id="saveExperience" class="btn" style="margin-top:10px;">Enviar reseña</button>
+      <div id="savedMessage" style="color:gold;margin-top:8px;opacity:0;transition:opacity 0.4s;">Gracias por tu opinión</div>
+    </div>
+
+    <!-- Opiniones -->
+    <div id="reviewsContainer" style="margin-top:20px;">
+      <h4>Opiniones de otros clientes</h4>
+      <div id="reviewsList" style="margin-top:12px;"></div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
-  <footer>
+  <footer style="width:100%; max-width:1100px;">
     <div>
       <strong>Fast TV Créditos</strong>
       <div>© 2025 Fast TV Todos los derechos reservados · Términos y Privacidad</div>
     </div>
+    <div style="color:var(--muted)"><a href="#" style="color:var(--muted);text-decoration:none;"></a></div>
   </footer>
 
-</div> <!-- cierre container -->
+</div> <!-- cierre .container -->
 
 <!-- WhatsApp flotante -->
 <a class="whatsapp" href="https://wa.me/522321452268" aria-label="WhatsApp">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1022px-WhatsApp.svg.png" alt="WhatsApp" style="width:28px; height:28px;">
 </a>
 
+<!-- SCRIPTS -->
 <script>
 /*
   IMPORTANTE: conserva tu URL de Apps Script aquí.
@@ -553,7 +608,6 @@ loadReviews();
 
   if (saveBtn) {
     saveBtn.addEventListener('click', () => {
-
       const comment = textarea.value.trim();
       if (comment) {
         localStorage.setItem('fasttv_experience', comment);
@@ -566,5 +620,8 @@ loadReviews();
   }
 })();
 
+</script>
 </body>
 </html>
+
+
