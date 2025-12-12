@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Fast TV Créditos Premium</title>
+<title>Sdmex - Créditos Premium</title>
 <meta name="description" content="Recarga créditos para Fast TV y disfruta contenido ilimitado con activación inmediata vía WhatsApp." />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
@@ -17,6 +17,7 @@
   --glass: rgba(255,255,255,0.03);
   --transition-speed: 0.35s;
 }
+
 
 /* RESET Y BODY */
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -105,6 +106,106 @@ nav{display:flex;gap:12px;flex-wrap:wrap;}
   text-align: center;
 }
 
+/* CONTENEDOR GENERAL */
+.deslizante {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    padding: 25px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    margin-top: 30px;
+    border-radius: 14px;
+}
+
+/* CARRIL QUE SE MUEVE */
+.deslizante-track {
+    display: flex;
+    gap: 40px;
+    animation: moverDerecha 20s linear infinite;
+}
+
+/* TAMAÑO DE TUS IMÁGENES (puedes hacerlo gigante sin afectar nada más) */
+.deslizante-track img {
+    height: 50px;  /* ← AJUSTA ESTE TAMAÑO COMO TÚ QUIERAS */
+    border-radius: 12px;
+    transition: 0.0s;
+}
+
+.deslizante-track img:hover {
+    transform: scale(1.05);
+}
+
+/* ANIMACIÓN HACIA LA DERECHA */
+@keyframes moverDerecha {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+
+
+
+
+
+/* ------------------------------ */
+/* IMÁGENES GRANDES ABAJO         */
+/* ------------------------------ */
+.fila-abajo {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    padding: 25px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    margin-top: 30px;
+    border-radius: 14px;
+}
+
+.fila-abajo-track {
+    display: flex;
+    gap: 40px;
+    animation: moverDerechaAbajo 20s linear infinite;
+}
+
+/* Aquí TÚ controlas el tamaño de las imágenes de abajo */
+.fila-abajo-track img {
+    height: 250px;   /* ← CAMBIA ESTO SI QUIERES MÁS GRANDE */
+    border-radius: 14px;
+    transition: 0.3s;
+}
+
+.fila-abajo-track img:hover {
+    transform: scale(1.05);
+}
+
+/* ANIMACIÓN (IZQUIERDA → DERECHA) */
+@keyframes moverDerechaAbajo {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* HERO */
 .hero{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;justify-content:center;width:100%;}
 .hero-left{flex:1;animation:fadeInUp 1s ease forwards;opacity:0;max-width:900px;margin:0 auto;text-align:center;}
@@ -116,6 +217,7 @@ nav{display:flex;gap:12px;flex-wrap:wrap;}
   -webkit-text-fill-color: transparent;
 }
 .hero-left p{color:var(--muted); margin-bottom:18px;}
+
 
 /* CARD */
 .card{
@@ -209,6 +311,14 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
   .package {max-width:100%;}
   header{flex-direction:column;gap:8px;align-items:center;}
 }
+
+
+
+
+
+<style>
+  
+
 </style>
 </head>
 
@@ -217,22 +327,28 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
 <canvas id="bgCanvas"></canvas>
 
 <!-- Header fijo -->
-<div class="header-wrapper">
+<div class="header-wrapper"> 
   <header>
     <div class="logo">
-      <div class="mark">FT</div>
+      <img src="https://image.roku.com/developer_channels/prod/677ad465d64b71c4dbf44edbdaa7be9a0c3faf6da47819faefc35227cdff40d3.png" 
+           alt="Sdmex" 
+           style="height:40px; width:auto;">
       <div style="line-height:1;">
-        <div style="font-weight:800;">Fast TV</div>
-        <div style="font-size:12px;color:var(--muted)">Créditos</div>
+        <div style="font-weight:800;"> </div>
+        <div style="font-size:12px;color:var(--muted)">Todo en solo lugar</div>
       </div>
     </div>
+
     <nav>
       <a class="btn promocion" href="#promocion">Promoción</a>
       <a class="btn" href="#credits">Comprar créditos</a>
       <a class="btn secondary" href="#benefits">Beneficios</a>
     </nav>
+
   </header>
 </div>
+
+
 
 <!-- Contenedor principal centrado -->
 <div class="container">
@@ -240,7 +356,10 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
   <!-- HERO -->
   <section class="hero" aria-label="hero">
     <div class="hero-left">
-      <h1>Recarga tus créditos y disfruta de todo el contenido sin límites</h1>
+      <div class="hero">
+        <h1>Mira TV, Series y Películas en cualquier momento y en cualquier lugar.</h1>
+        <p>Conéctate y Suscríbete con nosotros y se parte de la Plataforma más completa y estable del mercado</p>
+    </div>
       <p>Compra paquetes y recibe tu acceso activado vía WhatsApp en minutos.</p>
 
       <!-- TARJETA PRINCIPAL -->
@@ -262,6 +381,103 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
           <div class="feature">Deportes en vivo</div>
         </div>
       </div>
+
+
+
+
+<div class="deslizante">
+    <div class="deslizante-track">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item06-150x46-1-1.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item18-150x46-1-1.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item21-150x46-1-1.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item08-150x46-1-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/brand_item13-150x46-1-1-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/brand_item15-150x46-1-1-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/brand_item14-150x46-1-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/dazn-1-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/FOX-1-150x58.png">
+<img src="https://media-play.net/wp-content/uploads/2025/06/espn-1-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/laliga-1-1-150x50.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/premier-league-1-1-150x65.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/brand_item12-1.webp">
+
+
+
+    </div>
+</div>
+<h1>Explora y disfruta de los estrenos más recientes</h1>
+
+
+<div class="fila-abajo">
+    <div class="fila-abajo-track">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0019_MV5BODVkYjlkM2UtNWVlMS00N2U1LTgxOTYtODlmNmE1YTgzMjczXkEyXkFqcGc@._V1_.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0028_e4cd101f2e66f4e7818fcf53d05c006a.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0029_1709345318591_HO00000433.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0031_4463018.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0035_91ok1ACU4IL._AC_UF10001000_QL80_-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/the-last-of-us-2.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/black-bird.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/game-of-thrones.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0000_IMG_3933.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0003_IMG_3930.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0011_IMG_3922.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0012_IMG_3921.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0020_MV5BNzY0ZTlhYzgtOTgzZC00ZTg2LTk4NTEtZDllM2E2NGE5Njg2XkEyXkFqcGc@._V1_FMjpg_UX1000_.webp">
+
+
+    </div>
+</div>
+
+<video width="100%" controls>
+  <source src="video.mp4" type="video/mp4">
+  Tu navegador no soporta videos HTML5.
+</video>
+
+<h1>Las Mejores Ligas Y Deportes De Todo El Mundo</h1>
+
+
+<div class="fila-abajo">
+    <div class="fila-abajo-track">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/tennis-3.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/tv1-768x1039-1.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/tv10d_372cc453a2994aaa901005c9f33c95b2_mv2.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/tv10d_cf3be583460f4052882425a9e47b4adc_mv2.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/tv10d_ec383b588bad493cb5fcc36cfe69c76d_mv2.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/tv10d_ff2b6edbcb05496aa78e5c8a2627c6c3_mv2.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/tv-768x1039-1.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/4.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/6-1.webp">
+        <img src="https://media-play.net/wp-content/uploads/2025/06/neo-11.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/rigbi.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/Sans-titre-7-1-768x1039-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/Sans-titre-9-1-1-768x1039-1.webp">
+
+
+    </div>
+</div>
+
+<div class="deslizante">
+    <div class="deslizante-track">
+     <img src="">
+<img src="https://media-play.net/wp-content/uploads/2025/06/espn-plus-negro-300x169-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/FOXNOW-300x120-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/images-1-300x156-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/images-2.png">
+<img src="https://media-play.net/wp-content/uploads/2025/06/picte-2-300x300-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/picte-4-300x300-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/picture-11.png-300x300-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-2.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-3.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-9.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-10.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-12.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/WHITE_RGB-1-300x184-1.webp">
+<img src="https://media-play.net/wp-content/uploads/2025/06/WhatsApp-Image-2023-10-31-at-03.02.39_d463e940.webp">
+   </div>
+</div>
+
+
 
       <!-- PAQUETES -->
       <div id="credits" class="card show" style="margin-top:18px;">
