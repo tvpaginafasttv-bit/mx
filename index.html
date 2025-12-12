@@ -34,6 +34,10 @@ body{
   overflow-x:hidden;
   scroll-behavior:smooth;
   min-height:100vh;
+  width:100%;
+  margin:0 auto;
+  display:block;
+  padding-bottom:40px;
 }
 
 /* Animación suave del fondo */
@@ -43,7 +47,7 @@ body{
   100% { background-position: 0% 50%; }
 }
 
-/* CANVAS DE PARTICULAS */
+/* CANVAS DE PARTICULAS (placeholder) */
 canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}
 
 /* HEADER */
@@ -52,6 +56,7 @@ canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;po
   position:fixed;
   top:0;
   left:0;
+  right:0;
   z-index:999;
   display:flex;
   justify-content:center;
@@ -60,7 +65,7 @@ canvas#bgCanvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;po
 header{
   width:100%;
   max-width:1200px;
-  background: rgba(15, 23, 30, 0.25);
+  background: rgba(15, 23, 30, 0.2);
   backdrop-filter: blur(18px) saturate(180%);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
   border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -68,8 +73,9 @@ header{
   justify-content: space-between;
   align-items:center;
   padding:12px 20px;
-  border-radius:12px;
   transition: background 0.4s ease;
+  margin:8px;
+  border-radius:12px;
 }
 header:hover { background: rgba(15, 23, 30, 0.35); }
 .logo{display:flex;align-items:center;gap:10px;}
@@ -91,16 +97,56 @@ nav{display:flex;gap:12px;flex-wrap:wrap;}
 /* CONTENEDOR PRINCIPAL CENTRADO */
 .container {
   width: 100%;
-  max-width:1100px;
-  margin:150px auto 40px;
+  max-width: 1100px;
+  margin: 150px auto 40px; /* espacio para header fijo */
   padding: 0 16px;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
 }
 
+/* DESLIZANTES (logos e imágenes) */
+.deslizante, .fila-abajo {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    padding: 25px 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    margin-top: 30px;
+    border-radius: 14px;
+}
+
+.deslizante-track, .fila-abajo-track {
+    display: flex;
+    gap: 40px;
+    animation: moverDerecha 20s linear infinite;
+}
+
+.deslizante-track img {
+    height: 50px;
+    border-radius: 12px;
+    transition: 0.0s;
+}
+.fila-abajo-track img {
+    height: 250px;
+    border-radius: 14px;
+    transition: 0.3s;
+}
+.deslizante-track img:hover, .fila-abajo-track img:hover { transform: scale(1.05); }
+
+@keyframes moverDerecha {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0%); }
+}
+
 /* HERO */
+.hero{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;justify-content:center;width:100%;}
 .hero-left{flex:1;animation:fadeInUp 1s ease forwards;opacity:0;max-width:900px;margin:0 auto;text-align:center;}
 .hero-left h1{
   font-size:32px;
@@ -126,7 +172,6 @@ nav{display:flex;gap:12px;flex-wrap:wrap;}
   text-align:left;
   width:100%;
   max-width:900px;
-  margin-bottom:20px;
 }
 .card.show{opacity:1; transform:translateY(0);}
 .card::before{
@@ -138,6 +183,15 @@ nav{display:flex;gap:12px;flex-wrap:wrap;}
   pointer-events:none;
   z-index:0;
 }
+@keyframes rotateGlow{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* SISTEMA DE CALIFICACIÓN */
+.rating-container { text-align: center; margin-top: 10px; }
+.stars { display: flex; justify-content: center; gap: 8px; margin-bottom: 8px; }
+.star { font-size: 34px; color: rgba(255,255,255,0.18); cursor: pointer; transition: transform 0.2s ease, color 0.2s; }
+.star.active, .star:hover { color: gold; transform: scale(1.15); text-shadow: 0 0 12px gold, 0 0 22px var(--accent); }
+.rating-text { font-size: 14px; color: var(--muted); margin-top: 6px; }
+.rating-message { font-size: 15px; color: gold; opacity: 0; transition: opacity 0.5s; font-weight: bold; margin-top: 6px; }
 
 /* FEATURES & PACKAGES */
 .features{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;justify-content:center;}
@@ -166,29 +220,10 @@ border:1px solid rgba(255,255,255,0.02);font-size:14px;transition:all 0.3s;}
 .package .description{opacity:0; transform:translateY(8px); transition: all 0.35s; color:var(--muted); }
 .package:hover .description{opacity:1; transform:translateY(0);}
 
-/* DESLIZANTES */
-.deslizante, .fila-abajo {
-    width: 100%;
-    overflow: hidden;
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(10px);
-    padding: 25px 0;
-    border-radius: 14px;
-}
-.deslizante-track, .fila-abajo-track {
-    display: flex;
-    gap: 40px;
-    animation: moverDerecha 20s linear infinite;
-}
-.deslizante-track img, .fila-abajo-track img { border-radius:12px; transition:0.3s; }
-.deslizante-track img:hover, .fila-abajo-track img:hover { transform: scale(1.05); }
+/* INFO ROW & FOOTER */
+.info-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px;justify-content:center;}
+.info-item{flex:1;min-width:220px;max-width:420px;}
 
-@keyframes moverDerecha {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(0%); }
-}
-
-/* FOOTER */
 footer{
   margin-top:32px;padding:20px;border-radius:12px;background: rgba(255,255,255,0.02);
   display:flex;justify-content: space-between; flex-wrap:wrap; color:var(--muted); font-size:13px;
@@ -203,22 +238,23 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
 
 /* ANIMACIONES */
 @keyframes fadeInUp{0%{opacity:0;transform:translateY(20px);}100%{opacity:1;transform:translateY(0);}}
-@keyframes rotateGlow{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
 
-@media (max-width:768px){
-  .hero-left h1 { font-size:24px; }
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .hero-left h1 {font-size:24px;}
+  nav {flex-direction: row;flex-wrap: wrap;justify-content: center;}
+  .btn {font-size: 13px;padding: 6px 10px;border-radius: 8px;}
+  .package {max-width:100%;}
   header{flex-direction:column;gap:8px;align-items:center;}
-  nav{justify-content:center;}
-  .btn{font-size:13px;padding:6px 10px;}
-  .package{max-width:100%;}
-  .container{margin-top:180px;}
+  .container { margin-top: 170px; }
 }
 </style>
 </head>
 <body>
+
 <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
-<!-- Header -->
+<!-- Header fijo -->
 <div class="header-wrapper"> 
   <header>
     <div class="logo">
@@ -229,42 +265,51 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
         <div style="font-size:12px;color:var(--muted)">Todo en solo lugar</div>
       </div>
     </div>
+
     <nav>
       <a class="btn promocion" href="#promocion">Promoción</a>
       <a class="btn" href="#credits">Comprar créditos</a>
       <a class="btn secondary" href="#benefits">Beneficios</a>
     </nav>
+
   </header>
 </div>
 
+<!-- Contenedor principal centrado -->
 <div class="container">
 
   <!-- HERO -->
-  <section class="hero-left">
-    <h1>Mira TV, Series y Películas en cualquier momento y en cualquier lugar.</h1>
-    <p>Conéctate y Suscríbete con nosotros y se parte de la Plataforma más completa y estable del mercado</p>
-    <p>Compra paquetes y recibe tu acceso activado vía WhatsApp en minutos.</p>
-  </section>
+  <section class="hero" aria-label="hero">
+    <div class="hero-left">
+      <div class="hero">
+        <h1>Mira TV, Series y Películas en cualquier momento y en cualquier lugar.</h1>
+        <p>Conéctate y Suscríbete con nosotros y se parte de la Plataforma más completa y estable del mercado</p>
+      </div>
+      <p>Compra paquetes y recibe tu acceso activado vía WhatsApp en minutos.</p>
 
-  <!-- TARJETAS / PAQUETES -->
-  <div class="card show">
-    <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
-      <div style="font-weight:700;">1 crédito = 1 mes</div>
-      <div style="color:var(--muted);font-size:14px;">Compatible con TV Box, Fire Stick, Android TV, Chromecast, Roku</div>
-      <div style="font-size:13px;color:var(--muted);">Pagos 100% seguros — activamos entre 5 y 10 minutos</div>
-    </div>
-    <div class="features">
-      <div class="feature">+2,000 canales</div>
-      <div class="feature">+19,000 películas</div>
-      <div class="feature">+5,000 series</div>
-      <div class="feature">Deportes en vivo</div>
-    </div>
-  </div>
+      <!-- TARJETA PRINCIPAL -->
+      <div class="card show" style="margin-top:14px;">
+        <div style="display:flex; flex-direction:row; gap:12px; justify-content:space-between; align-items:center; flex-wrap:wrap;">
+          <div style="min-width:220px;">
+            <div style="font-weight:700;">1 crédito = 1 mes</div>
+            <div style="color:var(--muted);font-size:14px;margin-top:6px;">Compatible con TV Box, Fire Stick, Android TV, Chromecast, Roku</div>
+          </div>
+          <div style="text-align:right; min-width:200px;">
+            <div style="font-size:13px;color:var(--muted);">Pagos 100% seguros — activamos entre 5 y 10 minutos</div>
+          </div>
+        </div>
 
-  <!-- DESLIZANTES / IMÁGENES -->
-  <div class="deslizante" aria-hidden="true">
-    <div class="deslizante-track">
-      <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item06-150x46-1-1.webp" alt="">
+        <div class="features" style="justify-content:center; margin-top:16px;">
+          <div class="feature">+2,000 canales</div>
+          <div class="feature">+19,000 películas</div>
+          <div class="feature">+5,000 series</div>
+          <div class="feature">Deportes en vivo</div>
+        </div>
+      </div>
+
+      <div class="deslizante">
+        <div class="deslizante-track" aria-hidden="true">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item06-150x46-1-1.webp" alt="">
           <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item18-150x46-1-1.webp" alt="">
           <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item21-150x46-1-1.webp" alt="">
           <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item08-150x46-1-1.webp" alt="">
@@ -277,68 +322,203 @@ font-size:26px;color:white;box-shadow:0 8px 24px rgba(2,6,23,0.7);transition: tr
           <img src="https://media-play.net/wp-content/uploads/2025/06/laliga-1-1-150x50.webp" alt="">
           <img src="https://media-play.net/wp-content/uploads/2025/06/premier-league-1-1-150x65.webp" alt="">
           <img src="https://media-play.net/wp-content/uploads/2025/06/brand_item12-1.webp" alt="">
-    </div>
-  </div>
+        </div>
+      </div>
 
-  <!-- PAQUETES DE CRÉDITOS -->
-  <div id="credits" class="card show">
+      <h1 style="margin-top:28px;">Explora y disfruta de los estrenos más recientes</h1>
+
+      <div class="fila-abajo" aria-hidden="true">
+        <div class="fila-abajo-track">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0019_MV5BODVkYjlkM2UtNWVlMS00N2U1LTgxOTYtODlmNmE1YTgzMjczXkEyXkFqcGc@._V1_.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0028_e4cd101f2e66f4e7818fcf53d05c006a.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0029_1709345318591_HO00000433.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0031_4463018.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0035_91ok1ACU4IL._AC_UF10001000_QL80_-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/the-last-of-us-2.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/black-bird.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/game-of-thrones.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0000_IMG_3933.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0003_IMG_3930.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0011_IMG_3922.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0012_IMG_3921.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/synciptv-_0020_MV5BNzY0ZTlhYzgtOTgzZC00ZTg2LTk4NTEtZDllM2E2NGE5Njg2XkEyXkFqcGc@._V1_FMjpg_UX1000_.webp" alt="">
+        </div>
+      </div>
+
+      <video width="100%" controls style="margin-top:18px; border-radius:12px; overflow:hidden;">
+        <source src="video.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+      </video>
+
+      <h1 style="margin-top:28px;">Las Mejores Ligas Y Deportes De Todo El Mundo</h1>
+
+      <div class="fila-abajo" aria-hidden="true" style="margin-bottom:20px;">
+        <div class="fila-abajo-track">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/tennis-3.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/tv1-768x1039-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/tv10d_372cc453a2994aaa901005c9f33c95b2_mv2.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/tv10d_cf3be583460f4052882425a9e47b4adc_mv2.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/tv10d_ec383b588bad493cb5fcc36cfe69c76d_mv2.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/tv10d_ff2b6edbcb05496aa78e5c8a2627c6c3_mv2.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/tv-768x1039-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/4.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/6-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/neo-11.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/rigbi.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/Sans-titre-7-1-768x1039-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/Sans-titre-9-1-1-768x1039-1.webp" alt="">
+        </div>
+      </div>
+
+      <div class="deslizante" aria-hidden="true">
+        <div class="deslizante-track">
+          <img src="" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/espn-plus-negro-300x169-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/FOXNOW-300x120-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/images-1-300x156-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/images-2.png" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/picte-2-300x300-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/picte-4-300x300-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/picture-11.png-300x300-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-2.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-3.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-9.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-10.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/streaming-sports-movie-hd-premium-music-documentary-channels-iptv-adult-content-tv-channel-12.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/WHITE_RGB-1-300x184-1.webp" alt="">
+          <img src="https://media-play.net/wp-content/uploads/2025/06/WhatsApp-Image-2023-10-31-at-03.02.39_d463e940.webp" alt="">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PAQUETES -->
+  <div id="credits" class="card show" style="margin-top:18px;">
     <h2>Paquetes de créditos</h2>
     <p style="color:var(--muted);">Selecciona un paquete y compra mediante WhatsApp o Mercado Pago.</p>
+
     <div class="packages">
       <div class="package">
         <h3>1 Crédito</h3>
-        <div class="price">$140 MXN</div>
+        <div class="price" style="font-weight:700;margin:8px 0;">$140 MXN</div>
         <p class="description">1 mes de acceso completo a todos los canales.</p>
-        <a class="btn mercado" href="https://mpago.la/2yVCgh2" target="_blank">💳 Mercado Pago</a>
-        <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%201%20crédito." target="_blank">🏦 BBVA</a>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;">
+          <a class="btn mercado" href="https://mpago.la/2yVCgh2" target="_blank" rel="noopener">💳 Mercado Pago</a>
+          <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%201%20crédito." target="_blank" rel="noopener">🏦 BBVA</a>
+        </div>
       </div>
+
       <div class="package">
         <h3>3 Créditos</h3>
-        <div class="price">$360 MXN</div>
+        <div class="price" style="font-weight:700;margin:8px 0;">$360 MXN</div>
         <p class="description">Ahorra $40 y disfruta 3 meses de contenido ilimitado.</p>
-        <a class="btn mercado" href="https://mpago.la/2z6QZCW" target="_blank">💳 Mercado Pago</a>
-        <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%203%20créditos." target="_blank">🏦 BBVA</a>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;">
+          <a class="btn mercado" href="https://mpago.la/2z6QZCW" target="_blank" rel="noopener">💳 Mercado Pago</a>
+          <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%203%20créditos." target="_blank" rel="noopener">🏦 BBVA</a>
+        </div>
       </div>
+
       <div class="package">
         <h3>6 Créditos</h3>
-        <div class="price">$660 MXN</div>
+        <div class="price" style="font-weight:700;margin:8px 0;">$660 MXN</div>
         <p class="description">Ahorra $130 y disfruta 6 meses de contenido premium.</p>
-        <a class="btn mercado" href="https://mpago.la/2ExEasd" target="_blank">💳 Mercado Pago</a>
-        <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%206%20créditos." target="_blank">🏦 BBVA</a>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;">
+          <a class="btn mercado" href="https://mpago.la/2ExEasd" target="_blank" rel="noopener">💳 Mercado Pago</a>
+          <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20de%206%20créditos." target="_blank" rel="noopener">🏦 BBVA</a>
+        </div>
       </div>
     </div>
   </div>
 
   <!-- PAQUETE PRESENCIAL -->
-  <div id="presencial" class="card show">
+  <div id="presencial" class="card show" style="margin-top:16px;">
     <h2>Paquete presencial</h2>
     <p style="color:var(--muted);">Haz tu pago por medio de Mercado Pago o BBVA y activa mediante WhatsApp en tienda.</p>
     <div class="packages">
       <div class="package">
         <h3>1 Mes - Incluye TV Box y Fast TV Premium</h3>
-        <div class="price">$200 MXN</div>
+        <div class="price" style="font-weight:700;margin:8px 0;">$200 MXN</div>
         <p class="description">1 mes de acceso completo a todos los canales.</p>
-        <a class="btn mercado" href="https://mpago.li/2gBjeUo" target="_blank">💳 Mercado Pago</a>
-        <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20presencial." target="_blank">🏦 BBVA</a>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:12px;flex-wrap:wrap;">
+          <a class="btn mercado" href="https://mpago.li/2gBjeUo" target="_blank" rel="noopener">💳 Mercado Pago</a>
+          <a class="btn bbva" href="https://wa.me/522321452268?text=Hola,%20quiero%20pagar%20por%20BBVA%20el%20paquete%20presencial." target="_blank" rel="noopener">🏦 BBVA</a>
+        </div>
       </div>
     </div>
   </div>
 
+  <!-- Soporte -->
+  <section id="soporte" class="card show" style="margin-top:22px; width:100%;">
+    <h3>Soporte</h3>
+    <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+      <li>Problemas de conexión o acceso a tu cuenta.</li>
+      <li>Fallas en la reproducción o cortes en la señal.</li>
+      <li>Instalación y configuración de tu aplicación o dispositivo.</li>
+      <li>Renovación de servicio.</li>
+    </ul>
+    <div style="margin-top:12px;">
+      <a class="btn secondary" style="margin-left:8px" href="https://wa.me/522321452268?text=Hola,%20vengo%20desde%20la%20página%20web%20y%20necesito%20soporte%20para%20Fast%20TV.">Soporte</a>
+    </div>
+  </section>
+
+  <!-- Beneficios -->
+  <section id="benefits" class="card show" style="margin-top:24px; width:100%;">
+    <h3>Beneficios</h3>
+    <ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+      <li>Compatible con múltiples dispositivos</li>
+      <li>Entrega rápida y activación vía WhatsApp</li>
+      <li>Planes flexibles y descuentos en paquetes</li>
+    </ul>
+  </section>
+
+  <!-- RATING / RESEÑAS -->
+  <section id="rating" class="card show" style="margin-top:24px; width:100%;">
+    <h3>Califica esta página</h3>
+
+    <div class="rating-container">
+      <div class="stars" aria-hidden="false" role="radiogroup">
+        <span class="star" data-value="1" role="radio" aria-checked="false">★</span>
+        <span class="star" data-value="2" role="radio" aria-checked="false">★</span>
+        <span class="star" data-value="3" role="radio" aria-checked="false">★</span>
+        <span class="star" data-value="4" role="radio" aria-checked="false">★</span>
+        <span class="star" data-value="5" role="radio" aria-checked="false">★</span>
+      </div>
+      <div id="ratingMessage" class="rating-message">¡Gracias por tu calificación!</div>
+    </div>
+
+    <div style="margin-top:20px; text-align:center;">
+      <textarea id="experienceInput" placeholder="Describe tu experiencia..." rows="3"
+        style="width:90%;max-width:500px;border-radius:12px;padding:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);color:white;"></textarea><br>
+      <button id="saveExperience" class="btn" style="margin-top:10px;">Enviar reseña</button>
+      <div id="savedMessage" style="color:gold;margin-top:8px;opacity:0;transition:opacity 0.4s;">Gracias por tu opinión</div>
+    </div>
+
+    <!-- Opiniones -->
+    <div id="reviewsContainer" style="margin-top:20px;">
+      <h4>Opiniones de otros clientes</h4>
+      <div id="reviewsList" style="margin-top:12px;"></div>
+    </div>
+  </section>
+
   <!-- FOOTER -->
-  <footer>
+  <footer style="width:100%; max-width:1100px;">
     <div>
       <strong>Fast TV Créditos</strong>
       <div>© 2025 Fast TV Todos los derechos reservados · Términos y Privacidad</div>
     </div>
+    <div style="color:var(--muted)"><a href="#" style="color:var(--muted);text-decoration:none;"></a></div>
   </footer>
 
-</div> <!-- cierre container -->
+</div> <!-- cierre .container -->
 
 <!-- WhatsApp flotante -->
 <a class="whatsapp" href="https://wa.me/522321452268" aria-label="WhatsApp">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1022px-WhatsApp.svg.png" alt="WhatsApp" style="width:28px; height:28px;">
 </a>
 
+<!-- SCRIPTS -->
 <script>
 /*
   IMPORTANTE: conserva tu URL de Apps Script aquí.
@@ -466,7 +646,6 @@ loadReviews();
 
   if (saveBtn) {
     saveBtn.addEventListener('click', () => {
-
       const comment = textarea.value.trim();
       if (comment) {
         localStorage.setItem('fasttv_experience', comment);
@@ -479,20 +658,9 @@ loadReviews();
   }
 })();
 
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
